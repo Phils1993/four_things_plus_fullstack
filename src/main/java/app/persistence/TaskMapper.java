@@ -27,7 +27,7 @@ public class TaskMapper
             {
                 int id = rs.getInt("task_id");
                 String name = rs.getString("name");
-                Boolean done = rs.getBoolean("done");
+                boolean done = rs.getBoolean("done");
                 taskList.add(new Task(id, name, done, userId));
             }
         }
