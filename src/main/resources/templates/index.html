@@ -24,5 +24,11 @@
     <div> <p th:text="${message}"> </p></div>
 </form>
 
+<div th:if="session.currentUser != null">
+    <span th:text="${session.currentUser.username}"> </span> |
+    <a href="index.html" th:href="@{logout}"> Log out </a>
+
+</div>
+
 </body>
 </html>
