@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
-<title>Frontpage</title>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<title>FourThingsPlus</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="../public/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
@@ -30,10 +30,9 @@
 
 </table>
 
-<div th:if="session.currentUser != null">
-    <a href="index.html" th:href="@{logout}"> Log out </a>
-
-</div>
+<p th:if="${session.currentUser != null}">
+    <a href="index.html" th:href="@{/logout}"> Log out </a>
+</p>
 
 </body>
 </html>

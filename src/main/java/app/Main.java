@@ -3,7 +3,6 @@ package app;
 import app.config.SessionConfig;
 import app.config.ThymeleafConfig;
 import app.controllers.UserController;
-import app.entities.User;
 import app.persistence.ConnectionPool;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinThymeleaf;
@@ -21,6 +20,7 @@ public class Main {
     private static final ConnectionPool connectionPool = ConnectionPool.getInstance(USER, PASSWORD, URL, DB);
 
     public static void main(String[] args) {
+
         // Initializing Javalin and Jetty webserver
 
         Javalin app = Javalin.create(config -> {
@@ -32,7 +32,8 @@ public class Main {
         // Routing
 
         app.get("/", ctx -> ctx.render("index.html"));
-        UserController.addRoutes(app,connectionPool);
+        UserController.addRoutes(app, connectionPool);
 
     }
 }
+
