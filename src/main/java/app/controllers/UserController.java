@@ -19,7 +19,7 @@ public class UserController {
         app.get("logout", ctx -> logout(ctx));
     }
 
-    private static void logout(@NotNull Context ctx) {
+    private static void logout(Context ctx) {
         ctx.req().getSession().invalidate();
         ctx.render("index.html");
     }

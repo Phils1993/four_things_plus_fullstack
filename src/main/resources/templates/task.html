@@ -30,7 +30,8 @@
 
 </table>
 
-
+<p th:if="session.currentUser != null">
+    <a href="index.html" th:href="@{logout}"> Log out </a></p>
 
 </body>
 </html>
