@@ -8,6 +8,7 @@ import app.persistence.TaskMapper;
 import app.persistence.UserMapper;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -15,7 +16,14 @@ public class UserController {
 
     public static void addRoutes(Javalin app, ConnectionPool connectionPool) {
         app.post("login", ctx -> login(ctx, connectionPool));
+        app.get("logout", ctx -> logout(ctx));
     }
+
+    private static void logout(@NotNull Context ctx) {
+        ctx.req().getSession().invalidate();
+        ctx.render("index.html");
+    }
+
 
     public static void login(Context ctx, ConnectionPool connectionPool) throws DatabaseException {
         //hent form parametre
@@ -37,4 +45,6 @@ public class UserController {
         // tjek om bruger findes i databaser med de angivne username og password
 
     }
+
+
 }
