@@ -18,30 +18,57 @@
 
 <h1> Welcome, <span th:text="${session.currentUser.username}"></span></h1>
 
-<form method="post" >
-    <input type="text" name="task" placeholder="enter your task to be done" />
-    <button type="submit" formaction="addtask"> Add </button>
+<form class="generic-form" method="post">
+    <input class="input-large" type="text" name="taskname" placeholder="Enter your task to be done"/>
+    <button type="submit" formaction="addtask"> Add</button>
 </form>
 
 <h2>Doing</h2>
-
-
-
-<table class="task-table">
-    <thead>
+<form method="post">
+    <table class="task-table">
+        <thead>
         <tr>
             <th> Item</th>
             <th> Action</th>
         </tr>
-    </thead>
-    <tbody>
-        <tr th:each="task: ${taskList}">
+        </thead>
+        <tbody>
+        <tr th:each="task: ${taskList}" th:if="${ not task.done}" >
             <td th:text="${task.name}"></td>
-            <td><button type="submit"> Edit </button></td>
-        </tr>
-    </tbody>
+            <td>
+                <button type="submit" name="taskId" th:value="${task.taskId}" formaction="done"> Done</button>
+                <button type="submit"> Edit</button>
+            </td>
 
-</table>
+        </tr>
+        </tbody>
+
+    </table>
+
+    <h2>Done</h2>
+    <form method="post">
+        <table class="task-table">
+            <thead>
+            <tr>
+                <th> Item</th>
+                <th> Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="task: ${taskList}" th:if="${task.done}">
+                <td th:text="${task.name}"></td>
+                <td>
+                    <button type="submit" name="taskId" th:value="${task.taskId}" formaction="undo"> Undo</button>
+                    <button type="submit"> Edit</button>
+                    <button type="submit" name="taskId" th:value="${task.taskId}" formaction="deletetask"> Delete </button>
+                </td>
+
+            </tr>
+            </tbody>
+
+        </table>
+
+</form>
 
 <p th:if="${session.currentUser != null}">
     <a href="index.html" th:href="@{/logout}"> Log out </a>

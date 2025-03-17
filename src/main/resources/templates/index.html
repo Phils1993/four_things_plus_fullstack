@@ -9,24 +9,23 @@
 <body>
 <header>
 
-<a href="index.html" th:href="@{/}">
+    <a href="index.html" th:href="@{/}">
 
-    <img src="../public/images/fourthingsplus.png" th:src="@{/images/fourthingsplus.png}" width="35%"/>
-</a>
+        <img src="../public/images/fourthingsplus.png" th:src="@{/images/fourthingsplus.png}" width="35%"/>
+    </a>
 </header>
 
 
 <h1>Welcome to four things plus</h1>
 
 
+<form class="generic-form" method="post">
+    <input type="text" name="username" placeholder="Enter username"/>
+    <input type="password" name="password" placeholder="Enter password"/>
 
-<form class ="login-form" method="post">
-        <input type="text" name="username" placeholder="Enter username"/>
-        <input type="password" name="password" placeholder=" Enter password"/>
+    <button type="submit" formaction="/login">Get access to my mind</button>
 
-        <button type="submit" formaction="/login" >Get access to my mind</button>
-
-    <div> <p th:text="${message}"> </p></div>
+    <div><p th:text="${message}"></p></div>
 </form>
 
 <div th:if="${session.currentUser != null}">
@@ -35,7 +34,7 @@
 
 </div>
 
-<p> <a href="createuser.html" th:href="@{/createuser}">Create user </a> </p>
+<p><a href="createuser.html" th:href="@{/createuser}">Create user </a></p>
 
 </body>
 </html>
