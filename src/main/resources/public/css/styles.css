@@ -1,7 +1,41 @@
 /* Stylesheet for the application */
 
+
+html * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/*** flex box container ****/
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /*border: 1px solid red;*/
+}
+
+.page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 800px;
+    /*border: 1px solid blue;*/
+    min-height: 600px;
+    padding: 8px;
+}
+
+
 header {
-    margin-bottom: 30px;
+    margin-bottom: 40px;
+}
+header a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+header a img {
+    width: 70%;
 }
 
 h1 {
@@ -11,6 +45,12 @@ h1 {
 }
 
 /***** generel form styles *****/
+.generic-form{
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
 .generic-form [type=text], .generic-form [type=password] {
     padding: 10px;
     font-size: 1.2rem;
@@ -29,7 +69,7 @@ h1 {
     background-color: lightgreen;
 }
 
-.input-large{
+.input-large {
     width: 300px;
 }
 
@@ -39,6 +79,7 @@ h1 {
     font-size: 1.2rem;
     margin-top: 20px;
     margin-bottom: 20px;
+    min-width: 400px;
 }
 
 .task-table th, .task-table td {
@@ -51,7 +92,14 @@ h1 {
     background-color: silver;
 }
 
+/***** error css */
+.error {
+    border: 1px solid red;
+    padding: 10px;
+    color: red;
+    max-width: 400px;
+}
 
-/*** Styles add task ****/
+/*** flex box container ****/
 
 

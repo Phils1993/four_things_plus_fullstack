@@ -7,35 +7,34 @@
 </head>
 
 <body>
-<header>
+<div class="page">
+    <header>
 
-    <a href="index.html" th:href="@{/}">
+        <a href="index.html" th:href="@{/}">
 
-        <img src="../public/images/fourthingsplus.png" th:src="@{/images/fourthingsplus.png}" width="35%"/>
-    </a>
-</header>
-
-
-<h1>Welcome to four things plus</h1>
+            <img src="../public/images/fourthingsplus.png" th:src="@{/images/fourthingsplus.png}"/>
+        </a>
+    </header>
 
 
-<form class="generic-form" method="post">
-    <input type="text" name="username" placeholder="Enter username"/>
-    <input type="password" name="password1" placeholder=" Enter password"/>
-    <input type="password" name="password2" placeholder=" Enter password again"/>
+    <h1>Welcome to four things plus</h1>
 
-    <button type="submit" formaction="/createuser">Create user</button>
 
-    <div><p th:text="${message}"></p></div>
-</form>
+    <form class="generic-form" method="post">
+        <input type="text" name="username" placeholder="Enter username"/>
+        <input type="password" name="password1" placeholder=" Enter password"/>
+        <input type="password" name="password2" placeholder=" Enter password again"/>
 
-<div th:if="${session.currentUser != null}">
-    <span th:text="${session.currentUser.username}"></span> |
-    <a href="index.html" th:href="@{/logout}"> Log out </a>
+        <button type="submit" formaction="/createuser">Create user</button>
+
+        <div><p th:text="${message}"></p></div>
+    </form>
+
+    <div >
+
+        <a th:if="${session.currentUser != null}" href="index.html" th:href="@{/logout}"> Log out </a>
+    </div>
 
 </div>
-
-<p><a href="createuser.html" th:href="@{/createuser}">Create user </a></p>
-
 </body>
 </html>

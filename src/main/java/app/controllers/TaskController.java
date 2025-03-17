@@ -17,8 +17,44 @@ public class TaskController {
         app.post("done", ctx -> done(ctx, true, connectionPool));
         app.post("undo", ctx -> done(ctx, false, connectionPool));
         app.post("deletetask", ctx -> deleteTask(ctx, connectionPool));
-
+        app.post("edittask", ctx -> edittask(ctx, connectionPool));
+        app.post("updatetask", ctx -> updatetask(ctx, connectionPool));
     }
+
+    private static void updatetask(Context ctx, ConnectionPool connectionPool) {
+
+        User user = ctx.sessionAttribute("currentUser");
+
+        try {
+            int taskId = Integer.parseInt(ctx.formParam("taskId"));
+            String taskName = ctx.formParam("taskname");
+            TaskMapper.update(taskId, taskName, connectionPool);
+            List<Task> taskList = TaskMapper.getAllTasksPerUser(user.getUserId(), connectionPool);
+            ctx.attribute("taskList", taskList);
+            ctx.render("task.html");
+
+        } catch (DatabaseException | NumberFormatException e) {
+            ctx.attribute("message", e.getMessage());
+            ctx.render("index.html");
+
+        }
+    }
+
+    private static void edittask(Context ctx, ConnectionPool connectionPool) {
+        User user = ctx.sessionAttribute("currentUser");
+
+        try {
+            int taskId = Integer.parseInt(ctx.formParam("taskId"));
+            Task task = TaskMapper.getTaskById(taskId, connectionPool);
+            ctx.attribute("task", task);
+            ctx.render("edittask.html");
+        } catch (DatabaseException | NumberFormatException e) {
+            ctx.attribute("message", e.getMessage());
+            ctx.render("index.html");
+
+        }
+    }
+
 
     private static void deleteTask(Context ctx, ConnectionPool connectionPool) {
         User user = ctx.sessionAttribute("currentUser");
@@ -55,17 +91,22 @@ public class TaskController {
     private static void addtask(Context ctx, ConnectionPool connectionPool) {
         String taskname = ctx.formParam("taskname");
 
-        if (taskname.length() > 3) {
-            User user = ctx.sessionAttribute("currentUser");
-            try {
+        User user = ctx.sessionAttribute("currentUser");
+        try {
+            if (taskname.length() > 3) {
+
                 Task newTask = TaskMapper.addTask(user, taskname, connectionPool);
-                List<Task> taskList = TaskMapper.getAllTasksPerUser(user.getUserId(), connectionPool);
-                ctx.attribute("taskList", taskList);
-                ctx.render("task.html");
-            } catch (DatabaseException e) {
-                ctx.attribute("message", "Noget gik galt. Prv evt. igen");
-                ctx.render("task.html");
+            } else {
+                ctx.attribute("message", "En task skal være længere end 3 tegn! ");
+                ctx.render("index.html");
             }
+            List<Task> taskList = TaskMapper.getAllTasksPerUser(user.getUserId(), connectionPool);
+            ctx.attribute("taskList", taskList);
+            ctx.render("task.html");
+        } catch (DatabaseException e) {
+            ctx.attribute("message", "Noget gik galt. Prv evt. igen");
+            ctx.render("task.html");
         }
     }
 }
+
