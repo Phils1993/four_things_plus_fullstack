@@ -22,9 +22,10 @@
 
 <form class ="login-form" method="post">
         <input type="text" name="username" placeholder="Enter username"/>
-        <input type="password" name="password" placeholder=" Enter password"/>
+        <input type="password" name="password1" placeholder=" Enter password"/>
+    <input type="password" name="password2" placeholder=" Enter password again"/>
 
-        <button type="submit" formaction="/login" >Get access to my mind</button>
+        <button type="submit" formaction="/createuser" >Create user</button>
 
     <div> <p th:text="${message}"> </p></div>
 </form>

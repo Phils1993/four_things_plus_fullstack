@@ -8,13 +8,26 @@
 
 <body>
 
+<header>
+
+    <a href="index.html" th:href="@{/}">
+
+        <img src="../public/images/fourthingsplus.png" th:src="@{/images/fourthingsplus.png}" width="35%"/>
+    </a>
+</header>
+
 <h1> Welcome, <span th:text="${session.currentUser.username}"></span></h1>
 
-<h2>Your tasks</h2>
+<form method="post" >
+    <input type="text" name="task" placeholder="enter your task to be done" />
+    <button type="submit" formaction="addtask"> Add </button>
+</form>
 
-<p>her er de .... </p>
+<h2>Doing</h2>
 
-<table>
+
+
+<table class="task-table">
     <thead>
         <tr>
             <th> Item</th>
